@@ -16,6 +16,11 @@ pipeline {
                 bat 'mvn javadoc:javadoc --fail-never'
             }
         }
+        stage('test') {
+            steps {
+                bat 'mvn test --fail-never'
+            }
+        }
     }
 
     post {
