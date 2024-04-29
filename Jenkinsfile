@@ -11,6 +11,11 @@ pipeline {
                 bat 'mvn pmd:pmd'
             }
         }
+        stage('doc') {
+            steps {
+                bat 'mvn javadoc:javadoc --fail-never'
+            }
+        }
     }
 
     post {
