@@ -13,19 +13,19 @@ pipeline {
         }
         stage('doc') {
             steps {
-                bat 'mvn javadoc:javadoc --fail-never'
+                bat 'mvn javadoc:jar --fail-never'
             }
         }
-        // stage('test') {
-        //     steps {
-        //         bat 'mvn test --fail-never'
-        //     }
-        // }
+        stage('test') {
+            steps {
+                bat ' mvn test -Dtest=TestCss test'
+            }
+        }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: '**/target/surefile-reports/**', fingerprint: true
+            archiveArtifacts artifacts: '**/target/surefire-reports/**', fingerprint: true
             archiveArtifacts artifacts: '**/target/site/**', fingerprint: true
             archiveArtifacts artifacts: '**/target/**/*.jar', fingerprint: true
             archiveArtifacts artifacts: '**/target/**/*.war', fingerprint: true
