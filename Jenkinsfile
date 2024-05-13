@@ -8,7 +8,7 @@ pipeline {
         }
         stage('K8s') {
             steps {
-                sh 'kubectl set image deployments/lab13-node chenyangmao/teedyjenkins:v1.0'
+                sh 'kubectl set image deployments/lab13-node teedyjenkins=chenyangmao/teedyjenkins:v1.0'
             }
         }
     }
