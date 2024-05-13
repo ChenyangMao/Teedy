@@ -3,22 +3,12 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                bat 'mvn -B -DskipTests clean package' 
+                sh 'mvn -B -DskipTests clean package' 
             }
         }
-        stage('pmd') {
+        stage('K8s') {
             steps {
-                bat 'mvn pmd:pmd'
-            }
-        }
-        stage('doc') {
-            steps {
-                bat 'mvn javadoc:jar --fail-never'
-            }
-        }
-        stage('test') {
-            steps {
-                bat ' mvn test -Dtest=TestCss test'
+                sh 'kubectl set image deployments/lab13-node chenyangmao/teedyjenkins:v1.0'
             }
         }
     }
